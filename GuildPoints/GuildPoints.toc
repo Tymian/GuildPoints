@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50001
 ## Title: Draqisfang Guild Points
 ## Version: 0.0
 ## Notes: Draqisfang Guild Point management system using Public Notes
