@@ -1,0 +1,45 @@
+What's my end goal?
+
+To have an interface that always the Guild Points recorded on the public notes to be baacked up.
+To allow filtering/serching of the guild roster
+To increase/decrease Guild Points with a the click of a button
+To automatically caluclate guild points that should be rewarded
+
+What information will I need from WOW for my addon to work?
+
+Guild Roster
+Public Notes
+Party/Raid Info
+
+Will I need to make custome frames?
+
+Yes
+
+Will I need to interact with Blizzard's frames?
+
+Not sure
+
+Do I know the functioned needed to do everything I want to do?
+
+No
+
+CanEditPublicNote()- Returns true if you are allowed to edit a guild member's public note. 
+GuildRosterSetPublicNote(index, "note") - Sets the public note at index to "note". 
+
+CanGuildDemote() - Returns true if you are allowed to demote a guild member. 
+CanGuildPromote() - Returns true if you are allowed to demote a guild member.
+GuildDemote("name") - Demotes a player "name".
+GuildPromote("name") - Promotes a player "name". 
+
+GetGuildRosterInfo(index) - This function is used to get info on members in the guild. 
+	http://www.wowwiki.com/API_GetGuildRosterInfo
+
+? GuildRoster() - Fetches the guild list and fires a GUILD_ROSTER_UPDATE event. 
+
+SetGuildRosterSelection(index) - Selects/deselects a guild member according current sorting order. 
+SortGuildRoster("sort") - Sorts guildroster according "sort". Any unknown values sort on "name". 
+SetGuildRosterShowOffline(enabled) - Sets/Resets the show offline members flag. 
+
+GetNumRaidMembers() - Returns the number of players in your raid group. 
+GetRaidRosterInfo(index) - Returns information about the members of your raid . 
+http://www.wowwiki.com/API_GetRaidRosterInfo

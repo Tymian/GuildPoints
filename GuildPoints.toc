@@ -1,0 +1,8 @@
+## Interface: 50001
+## Title: Draqisfang Guild Points
+## Version: 0.0
+## Notes: Draqisfang Guild Point management system using Public Notes
+## Author: Wertle
+## SavedVariables: DGPBackupNum1, DGPBackupNum2, DGPBackupNum3, DGPBackupNum4, DGPBackupNum5, DGPWidth, DGPHeight, DGPBottomOffset, DGPLeftOffset
+
+GuildPoints.lua
