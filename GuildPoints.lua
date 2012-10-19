@@ -36,7 +36,7 @@ local dgp_Frame = CreateFrame("Frame", nil, UIParent) -- Create the Draqisfang G
 	
 	-- ** Title frame (Top left of main frame) **
 	local dgp_Title_Frame = CreateFrame("Button", nil, dgp_Frame) -- Create the Filter frame and attach it to the main frame
-	-- This has been changed from a frame to a button to enable click and drag. Leaveing the label as a frame however
+	-- This has been changed from a frame to a button to enable click and drag.
 	
 		-- Set the frame attributes
 		dgp_Title_Frame:SetFrameStrata("LOW") -- Set the display layer
@@ -100,11 +100,10 @@ local dgp_Frame = CreateFrame("Frame", nil, UIParent) -- Create the Draqisfang G
 		-- Register the frame for mouse clicks and define the action
 		--dgp_Bottom_Frame:RegisterForClicks("LeftButtonDown", "LeftButtonUp") -- Left button up and down are considered clicks
 		--dgp_Bottom_Frame:SetScript("OnClick", function(self)  dgp_Toggle_Move() end) -- Toggle UI movement when the frame is clicked
-	
-	
+		
 		-- ** Filter Editbox (Top Right of the 'Bottom Frame')
 		local dgp_Filter_Editbox = CreateFrame("EditBox", nil, dgp_Bottom_Frame)
-			-- Set the text for the editbox
+			-- Set the font for the editbox
 			dgp_Filter_Editbox:SetFontObject("GameFontHighlight")
 			
 			-- Turn off autofocus to stop the box keeping focus
@@ -128,6 +127,20 @@ local dgp_Frame = CreateFrame("Frame", nil, UIParent) -- Create the Draqisfang G
 			
 		-- ** End Filter editbox **
 		
+		-- ** Filter Edibox Label ( Left of the  Filter Editbox)
+		local dgp_Filter_Editbox_Label = CreateFrame("Frame", nil, dgp_Bottom_Frame)
+			
+			-- Set the frame attributes
+			dgp_Filter_Editbox_Label:SetFrameStrata("MEDIUM") -- Set the display layer
+				-- Size and position are calculated by dgp_Resize_Frames() after the addon loads
+		
+			-- Add a title to the addon window
+			dgp_Filter_Editbox_Label.text = dgp_Filter_Editbox_Label:CreateFontString(nil, "MEDIUM", "GameFontNormal")
+			dgp_Filter_Editbox_Label.text:SetAllPoints()
+			dgp_Filter_Editbox_Label.text:SetText("Filter by name:")
+		
+		-- ** End Filter Editbox Label
+		
 		-- ** Filter DropBox (Beneath the Filter Editbox)
 		local dgp_Filter_Dropbox = CreateFrame("Frame", nil, dgp_Bottom_Frame)
 			-- !!!! Currently set to a standard frame from postioning and sizing purposes
@@ -142,8 +155,38 @@ local dgp_Frame = CreateFrame("Frame", nil, UIParent) -- Create the Draqisfang G
 				tile = false, tileSize = 0, edgeSize = 16,
 				insets = { left = 4, right = 4, top = 4, bottom = 4} })
 			
-		
 		-- ** End Filter dropbox
+		
+		-- ** Filter Dropbox Label ( Left of the  Filter Dropbox)
+		local dgp_Filter_Dropbox_Label = CreateFrame("Frame", nil, dgp_Bottom_Frame)
+			
+			-- Set the frame attributes
+			dgp_Filter_Dropbox_Label:SetFrameStrata("MEDIUM") -- Set the display layer
+				-- Size and position are calculated by dgp_Resize_Frames() after the addon loads
+		
+			-- Add a title to the addon window
+			dgp_Filter_Dropbox_Label.text = dgp_Filter_Dropbox_Label:CreateFontString(nil, "MEDIUM", "GameFontNormal")
+			dgp_Filter_Dropbox_Label.text:SetAllPoints()
+			dgp_Filter_Dropbox_Label.text:SetText("Filter by type:")
+		
+		-- ** End Filter Dropbox Label
+		
+		-- ** Player Listbox (Beneath the Filter Dropbox, to the left side of the frame)
+		local dgp_Player_Listbox = CreateFrame("Frame", nil, dgp_Bottom_Frame)
+			-- !!!! Currently set to a standard frame for positioning and sizing purposes
+			
+			-- Set the listbox attributes
+			dgp_Player_Listbox:SetFrameStrata("MEDIUM") -- Set the display order
+				-- Size and position are calculated by dgp_Resize_Frame()
+				
+			-- Set the texture of the player listbox
+			dgp_Player_Listbox:SetBackdrop({ bgFile = "Interface\\AddOns\\GuildPoints\\Images\\Title-Frame-Background",
+				edgeFile = "Interface\\AddOns\\GuildPoints\\Images\\Main-Frame-Border",
+				tile = false, tileSize = 0, edgeSize = 16,
+				insets = { left = 4, right = 4, top = 4, bottom = 4} })
+			
+			
+		-- ** End Player Listbox
 		
 	-- ** End Bottom frame **
 	
@@ -245,17 +288,38 @@ function dgp_Resize_Frames()
 		
 			-- Size and position the filter editbox (Top right of the bottom frame)
 			dgp_Parent = dgp_Filter_Editbox:GetParent() -- Hold a pointer to the parent frame
-			dgp_Filter_Editbox:SetWidth(dgp_Parent:GetWidth() - 10) -- Filter editbox is 10 pixels less across than the parent frame
+			dgp_Filter_Editbox:SetWidth(dgp_Parent:GetWidth() - 110) -- Filter editbox is 110 pixels less across than the parent frame
 			dgp_Filter_Editbox:SetHeight(25) -- Filter editbox height is 25 pixels
 			dgp_Filter_Editbox:SetPoint("TOP", 0, -5) -- Position 5 pixels from the top of the bottom frame
 			dgp_Filter_Editbox:SetPoint("RIGHT", -5, 0) -- Position 5 pixels from the right of the bottom frame
 			
+			-- Size and position the filter editbox label (Left of the filter editbox)
+			dgp_Parent = dgp_Filter_Editbox_Label:GetParent() -- Hold a pointer to the parent frame
+			dgp_Filter_Editbox_Label:SetWidth(100) -- Filter editbox label width is 100 pixels
+			dgp_Filter_Editbox_Label:SetHeight(25) -- Filter editbox label height is 25 pixels
+			dgp_Filter_Editbox_Label:SetPoint("TOP", 0, -5) -- Position 5 pixels from the top of the bottom frame
+			dgp_Filter_Editbox_Label:SetPoint("LEFT", 5, 0) -- Position 5 pixels from the left of the bottom frame
+			
 			-- Size and position the filter dropbox (Beneath the filter editbox)
 			dgp_Parent = dgp_Filter_Dropbox:GetParent() -- Hold a pointer to the parent frame
-			dgp_Filter_Dropbox:SetWidth(dgp_Parent:GetWidth() - 10) -- Filter dropbox is the same size as the editbox
+			dgp_Filter_Dropbox:SetWidth(dgp_Parent:GetWidth() - 110) -- Filter dropbox is the same size as the editbox
 			dgp_Filter_Dropbox:SetHeight(25) -- Filter dropbox is the same height as the editbox
-			dgp_Filter_Dropbox:SetPoint("TOP", 0, -30) -- Position 5 pixels below the editbox
+			dgp_Filter_Dropbox:SetPoint("TOP", 0, -30 ) -- Position 5 pixels below the editbox
 			dgp_Filter_Dropbox:SetPoint("RIGHT", -5, 0) -- Position 5 pixels from the right of the bottom frame
+			
+			-- Size and position the filter dropbox label (Left of the filter editbox)
+			dgp_Parent = dgp_Filter_Dropbox_Label:GetParent() -- Hold a pointer to the parent frame
+			dgp_Filter_Dropbox_Label:SetWidth(100) -- Filter dropbox label width is 100 pixels
+			dgp_Filter_Dropbox_Label:SetHeight(25) -- Filter dropbox label height is 25 pixels
+			dgp_Filter_Dropbox_Label:SetPoint("TOP", 0, -30) -- Position 5 pixels from the top of the bottom frame
+			dgp_Filter_Dropbox_Label:SetPoint("LEFT", 5, 0) -- Position 5 pixels from the left of the bottom frame
+			
+			-- Size and position the player listbox (Beneath the filter dropbox to the left side of the frame)
+			dgp_Parent = dgp_Player_Listbox:GetParent() -- Hold a pointer to the parent frame
+			dgp_Player_Listbox:SetWidth(dgp_Parent:GetWidth() * 2/3) -- Player listbox is 2/3 the width of the bottom frame
+			dgp_Player_Listbox:SetHeight(dgp_Parent:GetHeight() - 60) -- Player listboxtakes up the remaining height of the bottom frame
+			dgp_Player_Listbox:SetPoint("TOP", 0, -55) -- Position 5 pixels below the filter dropbox
+			dgp_Player_Listbox:SetPoint("LEFT", 5, 0) -- Position 5 pixels from the left of the bottom frame
 			
 end -- dgp_Resize_Frames
 
